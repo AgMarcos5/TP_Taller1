@@ -43,7 +43,7 @@ public class Sistema {
 	 * @param persona : Parametro que será agregado a nuestro sistema
 	 * @throws PersonaExistenteException: Se lanza en el caso que se encuentra que la persona ingresada sea repetida
 	 */
-	public void agregarFacturas(Persona persona) { 
+	public void agregarFacturas(Persona persona){ 
 		if(!this.listaFacturas.containsKey(persona.getNombre())) 
 			this.listaFacturas.put(persona.getNombre(), new Factura(persona));
 		else
@@ -55,6 +55,7 @@ public class Sistema {
 			}
 		}
 	}
+	
 	
 	/**
 	 * Agrega un servicio nuevo a la lista de contrataciones de factura<br>
@@ -69,7 +70,7 @@ public class Sistema {
 	 * @throws ServicioInternetInvalidoException: Se lanza en el caso de que el servicio sea invalido
 	 * @throws DomicilioInvalidoException: Se lanza en el caso de que el domicilio sea invalido
 	 */
-	public void agregarServicio(String persona,String internet, int cantCel, int cantTel, int cantTV, Domicilio domicilio) { 
+	public void agregarServicio(String persona,String internet, int cantCel, int cantTel, int cantTV, Domicilio domicilio){ 
 		try {
 			this.listaFacturas.get(persona).nuevaContratacion(ContratableFactory.nuevoServicio(internet, cantCel, cantTel, cantTV, domicilio));
 		} catch (ServicioInternetInvalidoException e) { //VACIO O NO EXISTE
@@ -78,6 +79,7 @@ public class Sistema {
 			System.out.println(e.getMessage());
 		}
 	}
+	
 	
 	/**
 	 * Realiza el cambio de agregado del servicio
@@ -110,7 +112,7 @@ public class Sistema {
 	 * @param persona: Parametro de tipo String que representa al abonado de la factura a duplicar
 	 * @throws CloneNotSupportedException: Se lanza en el caso de que no sea posible clonar
 	 */
-	public void duplicarFactura(String persona) {
+	public void duplicarFactura(String persona){
 		Factura facturaOriginal=this.listaFacturas.get(persona);
 		Factura facturaDuplicada=null;
 		try {
@@ -195,6 +197,13 @@ public class Sistema {
 	{
 		assert listaFacturas!=null : "La listaFacturas debe ser distinta de null";
 	}
+
+	public HashMap<String, Factura> getListaFacturas() {
+		return listaFacturas;
+	}
+
+	
+	
 
 	
 }
